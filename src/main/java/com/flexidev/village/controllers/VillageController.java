@@ -42,12 +42,8 @@ public class VillageController {
 
             BigDecimal result = calculatorService.getAverageDeaths(yearOfBirthA, yearOfBirthB);
 
-            model.addAttribute("ageOfDeathA", ageOfDeathA);
-            model.addAttribute("yearOfDeathA", yearOfDeathA);
-            model.addAttribute("ageOfDeathB", ageOfDeathB);
-            model.addAttribute("yearOfDeathB", yearOfDeathB);
-            model.addAttribute("yearA", yearOfBirthA);
-            model.addAttribute("yearB", yearOfBirthB);
+            model.addAttribute("yearOfBirthA", yearOfBirthA);
+            model.addAttribute("yearOfBirthB", yearOfBirthB);
             model.addAttribute("isError", false);
             model.addAttribute("result", result);
         } catch (Exception e) {
@@ -56,6 +52,12 @@ public class VillageController {
             model.addAttribute("errorMessage", "An error occurred.");
             model.addAttribute("result", -1);
         }
+
+        // Keep the submitted form value
+        model.addAttribute("ageOfDeathA", ageOfDeathA);
+        model.addAttribute("yearOfDeathA", yearOfDeathA);
+        model.addAttribute("ageOfDeathB", ageOfDeathB);
+        model.addAttribute("yearOfDeathB", yearOfDeathB);
 
         return "index";
     }

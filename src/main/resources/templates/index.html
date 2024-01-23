@@ -40,16 +40,17 @@
         <button class="btn-dark" type="submit">Calculate Average</button>
     </form>
 
-
-    <div class="result-container">
-        <th:block th:if="${!isError}">
-            <p th:text="'Average number of victims died between year ' + ${yearA} + ' and ' + ${yearB}"></p>
-        </th:block>
-        <th:block th:unless="${!isError}">
-            <p id="error-message" th:text="'Error: ' + ${errorMessage}"></p>
-        </th:block>
-        
-        <div id="result" th:text="${result}"></div>
-    </div>
+    <th:block th:if="${result != null}">
+        <div class="result-container">
+            <th:block th:if="${!isError}">
+                <p th:text="'Average number of victims died between year ' + ${yearOfBirthA} + ' and ' + ${yearOfBirthB}"></p>
+            </th:block>
+            <th:block th:unless="${!isError}">
+                <p id="error-message" th:text="'Error: ' + ${errorMessage}"></p>
+            </th:block>
+            
+            <div id="result" th:text="${result}"></div>
+        </div>
+    </th:block>
 </body>
 </html>
