@@ -1,11 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body {
     font-family: 'Lato', sans-serif;
     margin: 4% 10%;
+    color: #303030;
 }
 
 header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+header .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+header .sub-title {
+    letter-spacing: 2px;
+}
+
+#credit {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.btn-dark {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #303030;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.btn-dark:hover {
+    background-color: #424242;
+}
+
+.instruction {
     text-align: center;
 }
 
@@ -17,10 +57,13 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 40px;
+    margin: 10px 0;
 }
 
-.villager-data {
-    margin: 20px;
+.villager-data h3 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
 }
 
 #villager-form {
@@ -34,7 +77,7 @@ input {
 }
 
 #villager-form input {
-    width: 50px;
+    width: 40px;
     padding: 4px;
 }
 
@@ -43,6 +86,10 @@ input {
 }
 
 #result {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
+}
+
+#error-message {
+    color: #e22727;
 }

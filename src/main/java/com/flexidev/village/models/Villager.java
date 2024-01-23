@@ -3,7 +3,6 @@ package com.flexidev.village.models;
 public class Villager {
     private int ageOfDeath;
     private int yearOfDeath;
-    private int yearOfBirth;
 
     public Villager(int ageOfDeath, int yearOfDeath) {
         this.ageOfDeath = ageOfDeath;

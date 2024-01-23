@@ -2,8 +2,6 @@ package com.flexidev.village.services;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,23 +9,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    private List<BigInteger> sequence = new ArrayList<>();
-    private List<BigInteger> sumMemo = new ArrayList<>();
+    private List<BigInteger> sequence = new ArrayList<>(); // List to keep track the sequence of Fibonacci numbers
+    private List<BigInteger> sumMemo = new ArrayList<>(); // List to keep track the amount of villagers killed on each year
 
-    public BigDecimal getAverageDeaths(int personABirthYear, int personBBirthYear) {
+    public BigDecimal getAverageDeaths(int personABirthYear, int personBBirthYear) throws Exception {
         int maxBirthYear = Math.max(personABirthYear, personBBirthYear);
+
+        // Calculate the total deaths of the higher birth year
         calculateTotalDeaths(maxBirthYear);
 
         BigInteger totalDeathYearA = sumMemo.get(personABirthYear - 1);
         BigInteger totalDeathYearB = sumMemo.get(personBBirthYear - 1);
 
         BigDecimal averageDeaths = BigDecimal.valueOf(totalDeathYearA.add(totalDeathYearB).doubleValue() / 2.0);
-        averageDeaths = averageDeaths.setScale(1, RoundingMode.HALF_UP);
 
         return averageDeaths;
     }
 
-    private void calculateTotalDeaths(int maxYear) {
+    private void calculateTotalDeaths(int maxYear) throws Exception {
         if (sequence.isEmpty()) {
             sequence.add(BigInteger.ONE);
             sumMemo.add(BigInteger.ONE);

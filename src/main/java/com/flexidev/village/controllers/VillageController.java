@@ -24,26 +24,38 @@ public class VillageController {
 
     @PostMapping("/")
     public String calculate(@RequestParam int ageOfDeathA, @RequestParam int ageOfDeathB, @RequestParam int yearOfDeathA, @RequestParam int yearOfDeathB, Model model) {
-        Villager villagerA = new Villager(ageOfDeathA, yearOfDeathA);
-        Villager villagerB = new Villager(ageOfDeathB, yearOfDeathB);
-        int yearOfBirthA = villagerA.getYearOfBirth();
-        int yearOfBirthB = villagerB.getYearOfBirth();
+        try {
+            Villager villagerA = new Villager(ageOfDeathA, yearOfDeathA);
+            Villager villagerB = new Villager(ageOfDeathB, yearOfDeathB);
 
-        if (yearOfBirthA < 0 || yearOfBirthB < 0) {
+            // Get each villager's year of birth
+            int yearOfBirthA = villagerA.getYearOfBirth();
+            int yearOfBirthB = villagerB.getYearOfBirth();
+
+            if (yearOfBirthA < 0 || yearOfBirthB < 0) {
+                model.addAttribute("isError", true);
+                model.addAttribute("errorMessage", "Year of birth cannot be less than 0.");
+                model.addAttribute("result", -1);
+
+                return "index";
+            }
+
+            BigDecimal result = calculatorService.getAverageDeaths(yearOfBirthA, yearOfBirthB);
+
+            model.addAttribute("ageOfDeathA", ageOfDeathA);
+            model.addAttribute("yearOfDeathA", yearOfDeathA);
+            model.addAttribute("ageOfDeathB", ageOfDeathB);
+            model.addAttribute("yearOfDeathB", yearOfDeathB);
+            model.addAttribute("yearA", yearOfBirthA);
+            model.addAttribute("yearB", yearOfBirthB);
+            model.addAttribute("isError", false);
+            model.addAttribute("result", result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("isError", true);
+            model.addAttribute("errorMessage", "An error occurred.");
             model.addAttribute("result", -1);
-
-            return "index";
         }
-
-        BigDecimal result = calculatorService.getAverageDeaths(yearOfBirthA, yearOfBirthB);
-
-        model.addAttribute("ageOfDeathA", ageOfDeathA);
-        model.addAttribute("yearOfDeathA", yearOfDeathA);
-        model.addAttribute("ageOfDeathB", ageOfDeathB);
-        model.addAttribute("yearOfDeathB", yearOfDeathB);
-        model.addAttribute("yearA", villagerA.getYearOfBirth());
-        model.addAttribute("yearB", villagerB.getYearOfBirth());
-        model.addAttribute("result", result);
 
         return "index";
     }
