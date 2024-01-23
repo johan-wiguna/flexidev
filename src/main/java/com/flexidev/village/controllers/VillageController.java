@@ -1,5 +1,7 @@
 package com.flexidev.village.controllers;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,7 @@ public class VillageController {
             return "index";
         }
 
-        double result = calculatorService.getAverageDeaths(yearOfBirthA, yearOfBirthB);
+        BigDecimal result = calculatorService.getAverageDeaths(yearOfBirthA, yearOfBirthB);
 
         model.addAttribute("ageOfDeathA", ageOfDeathA);
         model.addAttribute("yearOfDeathA", yearOfDeathA);

@@ -1,5 +1,9 @@
 package com.flexidev.village.services;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,29 +11,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    private List<Integer> sequence = new ArrayList<>();
-    private List<Integer> sumMemo = new ArrayList<>();
+    private List<BigInteger> sequence = new ArrayList<>();
+    private List<BigInteger> sumMemo = new ArrayList<>();
 
-    public double getAverageDeaths(int personABirthYear, int personBBirthYear) {
+    public BigDecimal getAverageDeaths(int personABirthYear, int personBBirthYear) {
         int maxBirthYear = Math.max(personABirthYear, personBBirthYear);
         calculateTotalDeaths(maxBirthYear);
 
-        int totalDeathYearA = sumMemo.get(personABirthYear - 1);
-        int totalDeathYearB = sumMemo.get(personBBirthYear - 1);
+        BigInteger totalDeathYearA = sumMemo.get(personABirthYear - 1);
+        BigInteger totalDeathYearB = sumMemo.get(personBBirthYear - 1);
 
-        return (totalDeathYearA + totalDeathYearB) / 2.0;
+        BigDecimal averageDeaths = BigDecimal.valueOf(totalDeathYearA.add(totalDeathYearB).doubleValue() / 2.0);
+        averageDeaths = averageDeaths.setScale(1, RoundingMode.HALF_UP);
+
+        return averageDeaths;
     }
 
     private void calculateTotalDeaths(int maxYear) {
         if (sequence.isEmpty()) {
-            sequence.add(1);
-            sumMemo.add(1);
+            sequence.add(BigInteger.ONE);
+            sumMemo.add(BigInteger.ONE);
         }
 
         for (int i = sequence.size(); i <= maxYear; i++) {
-            int nextValue = sequence.get(i - 1) + (i >= 2 ? sequence.get(i - 2) : 0);
+            BigInteger nextValue = sequence.get(i - 1).add(i >= 2 ? sequence.get(i - 2) : BigInteger.valueOf(0));
             sequence.add(nextValue);
-            sumMemo.add(sumMemo.get(i - 1) + nextValue);
+            sumMemo.add(sumMemo.get(i - 1).add(nextValue));
         }
     }
 }
