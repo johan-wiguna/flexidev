@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sum Calculator</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <h1>The Ultimate Program</h1>
+        <p>Enter 2 death villagers data below.</p>
+    </header>
+
+    <form id="villager-form" action="/" method="post">
+        <div class="villager-container">
+            <div id="villager-data-a" class="villager-data">
+                <h3>Villager A</h3>
+                <label for="a-age-of-death">Age of Death:</label>
+                <input type="number" id="a-age-of-death" name="ageOfDeathA" th:value="${ageOfDeathA}" required>
+                <br>
+                <label for="a-year-of-death">Year of Death:</label>
+                <input type="number" id="a-year-of-death" name="yearOfDeathA" th:value="${yearOfDeathA}" required>
+                <br>
+            </div>
+            
+            <div id="villager-data-b" class="villager-data">
+                <h3>Villager B</h3>
+                <label for="b-age-of-death">Age of Death:</label>
+                <input type="number" id="b-age-of-death" name="ageOfDeathB" th:value="${ageOfDeathB}" required>
+                <br>
+                <label for="b-year-of-death">Year of Death:</label>
+                <input type="number" id="b-year-of-death" name="yearOfDeathB" th:value="${yearOfDeathB}" required>
+                <br>
+            </div>
+        </div>
+
+        <button type="submit">Calculate Average</button>
+    </form>
+
+    <th:block th:if="${result != null}">
+        <div class="result-container">
+            <h3 th:text="'Average number of victims died between year ' + ${yearA} + ' and ' + ${yearB}"></h3>
+            <div id="result" th:text="${result}"></div>
+        </div>
+    </th:block>
+</body>
+</html>

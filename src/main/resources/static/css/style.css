@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 4% 10%;
+}
+
+header {
+    text-align: center;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+.villager-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.villager-data {
+    margin: 20px;
+}
+
+#villager-form {
+    text-align: center;
+}
+
+#villager-form label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+#villager-form input {
+    width: 50px;
+    padding: 4px;
+}
+
+.result-container {
+    text-align: center;
+}
+
+#result {
+    font-size: 2rem;
+    font-weight: bold;
+}
